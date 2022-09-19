@@ -10,5 +10,5 @@ import java.util.List;
  **/
 public interface BookmarkService {
 
-    ResponseEntity<List<Bookmark>> getAllBookmarks();
+    ResponseEntity<List<Bookmark>> getAllBookmarks(Integer page);
 }

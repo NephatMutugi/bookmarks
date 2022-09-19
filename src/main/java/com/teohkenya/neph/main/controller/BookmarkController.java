@@ -27,6 +27,6 @@ final BookmarkService bookmarkService;
 
     @GetMapping(value = "all")
     public ResponseEntity<List<Bookmark>> getAllBookmarks(){
-        return bookmarkService.getAllBookmarks();
+        return bookmarkService.getAllBookmarks(1);
     }
 }
