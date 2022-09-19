@@ -1,12 +1,13 @@
 package com.teohkenya.neph.main.controller;
 
 import com.teohkenya.neph.main.model.Bookmark;
+import com.teohkenya.neph.main.model.BookmarksDto;
 import com.teohkenya.neph.main.service.BookmarkService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -26,7 +27,13 @@ final BookmarkService bookmarkService;
     }
 
     @GetMapping(value = "all")
-    public ResponseEntity<List<Bookmark>> getAllBookmarks(){
-        return bookmarkService.getAllBookmarks(1);
+    public ResponseEntity<List<Bookmark>> getAllBookmarks(@RequestParam(name = "page", defaultValue = "1") Integer page){
+        return bookmarkService.getAllBookmarks(page);
     }
+
+    @GetMapping(value = "paged")
+    public ResponseEntity<BookmarksDto> getPagedBookmarks(@RequestParam(name = "page", defaultValue = "1") Integer page){
+        return bookmarkService.getBookmarksPageable(page);
+    }
+
 }

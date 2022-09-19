@@ -1,6 +1,7 @@
 package com.teohkenya.neph.main.service;
 
 import com.teohkenya.neph.main.model.Bookmark;
+import com.teohkenya.neph.main.model.BookmarksDto;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -11,4 +12,6 @@ import java.util.List;
 public interface BookmarkService {
 
     ResponseEntity<List<Bookmark>> getAllBookmarks(Integer page);
+
+    ResponseEntity<BookmarksDto> getBookmarksPageable(Integer page);
 }

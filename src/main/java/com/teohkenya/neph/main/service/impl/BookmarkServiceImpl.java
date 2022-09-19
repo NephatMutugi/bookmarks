@@ -1,6 +1,7 @@
 package com.teohkenya.neph.main.service.impl;
 
 import com.teohkenya.neph.main.model.Bookmark;
+import com.teohkenya.neph.main.model.BookmarksDto;
 import com.teohkenya.neph.main.repository.BookmarkRepo;
 import com.teohkenya.neph.main.service.BookmarkService;
 import lombok.extern.slf4j.Slf4j;
@@ -46,5 +47,18 @@ public class BookmarkServiceImpl implements BookmarkService {
         log.info(bookmarkList.toString());
 
         return new ResponseEntity<>(bookmarkList, HttpStatus.OK);
+    }
+
+
+    // GET WITH DTO
+    @Transactional(readOnly = true)
+    @Override
+    public ResponseEntity<BookmarksDto> getBookmarksPageable(@RequestParam(name = "page", defaultValue = "1") Integer page) {
+        int pageNo = page < 1 ? 0 : page-1;
+        Pageable pageable = PageRequest.of(pageNo, 10, Sort.Direction.DESC, "timestamp");
+        BookmarksDto bookmarksDto = new BookmarksDto(bookmarkRepo.findAll(pageable));
+
+
+        return new ResponseEntity<>(bookmarksDto, HttpStatus.OK);
     }
 }
