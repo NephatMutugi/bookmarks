@@ -7,19 +7,18 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.Instant;
 
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
 @Entity
-@Table(name = "bookmark")
+@Table(name = "bookmarks")
 public class Bookmark {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Size(max = 255)
     @NotNull
@@ -31,8 +30,7 @@ public class Bookmark {
     @Column(name = "url", nullable = false)
     private String url;
 
-    @NotNull
-    @Column(name = "timestamp", nullable = false)
+    @Column(name = "timestamp")
     private Instant timestamp;
 
 }

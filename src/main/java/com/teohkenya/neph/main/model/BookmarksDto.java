@@ -1,5 +1,6 @@
 package com.teohkenya.neph.main.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.domain.Page;
@@ -26,8 +27,10 @@ public class BookmarksDto {
     private int currentPage;
 
     // Returns true if current page is the first page
+    @JsonProperty("isFirst")
     private boolean isFirst;
 
+    @JsonProperty("isLast")
     // Returns true if current page is the last page
     private boolean isLast;
 

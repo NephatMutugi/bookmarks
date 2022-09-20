@@ -40,11 +40,10 @@ public class BookmarkServiceImpl implements BookmarkService {
     public ResponseEntity<List<Bookmark>> getAllBookmarks(@RequestParam(name = "page", defaultValue = "1") Integer page) {
 
         int pageNo = page < 1 ? 0 : page - 1;
-        Pageable pageable = PageRequest.of(pageNo, 10, Sort.Direction.DESC, "timestamp");
+        Pageable pageable = PageRequest.of(pageNo, 10, Sort.Direction.ASC, "timestamp");
 
         List<Bookmark> bookmarkList = bookmarkRepo.findAll(pageable).getContent();
 
-        log.info(bookmarkList.toString());
 
         return new ResponseEntity<>(bookmarkList, HttpStatus.OK);
     }
@@ -54,8 +53,8 @@ public class BookmarkServiceImpl implements BookmarkService {
     @Transactional(readOnly = true)
     @Override
     public ResponseEntity<BookmarksDto> getBookmarksPageable(@RequestParam(name = "page", defaultValue = "1") Integer page) {
-        int pageNo = page < 1 ? 0 : page-1;
-        Pageable pageable = PageRequest.of(pageNo, 10, Sort.Direction.DESC, "timestamp");
+        int pageNo = page < 1 ? 0 : page - 1;
+        Pageable pageable = PageRequest.of(pageNo, 10, Sort.Direction.ASC, "timestamp");
         BookmarksDto bookmarksDto = new BookmarksDto(bookmarkRepo.findAll(pageable));
 
 

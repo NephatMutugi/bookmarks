@@ -8,11 +8,12 @@ logging:
 spring:
   datasource:
     username: root
-    password:
+    password: Br00k51d3
     url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/bookmarks
 
   jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+#    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: update
 
