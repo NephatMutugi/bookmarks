@@ -17,7 +17,7 @@ import java.util.List;
  * @ Author NMuchiri
  **/
 @RestController
-@RequestMapping("api/v1/bookmarks/")
+@RequestMapping("/api/v1/bookmarks/")
 @Slf4j
 public class BookmarkController {
     /*-------------------------GLOBAL VARIABLES-----------------------*/
