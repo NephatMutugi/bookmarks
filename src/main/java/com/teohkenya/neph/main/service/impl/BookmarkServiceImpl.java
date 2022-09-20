@@ -1,7 +1,7 @@
 package com.teohkenya.neph.main.service.impl;
 
 import com.teohkenya.neph.main.model.Bookmark;
-import com.teohkenya.neph.main.model.BookmarksDto;
+import com.teohkenya.neph.main.dto.BookmarksDto;
 import com.teohkenya.neph.main.repository.BookmarkRepo;
 import com.teohkenya.neph.main.service.BookmarkService;
 import lombok.extern.slf4j.Slf4j;
