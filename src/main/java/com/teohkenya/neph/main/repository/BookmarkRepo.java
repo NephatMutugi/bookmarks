@@ -1,8 +1,11 @@
 package com.teohkenya.neph.main.repository;
 
+import com.teohkenya.neph.main.dto.BookmarkDto;
 import com.teohkenya.neph.main.model.Bookmark;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,9 +17,11 @@ import java.util.Optional;
 public interface BookmarkRepo extends JpaRepository<Bookmark, Integer> {
 
     List<Bookmark> findAll();
-//    @RequestParam(name = "page", defaultValue = "1") Integer page
 
-    Optional<Bookmark> findAllById(Integer id);
+    @Query("select new com.teohkenya.neph.main.dto.BookmarkDto(b.id, b.title, b.url, b.timestamp) from Bookmark  b")
+    Page<BookmarkDto> findBookmarks(Pageable page);
+
+    Optional<Bookmark> findAllById(Long id);
 
     Bookmark findBookmarksByTitle(String  title);
 

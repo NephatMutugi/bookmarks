@@ -1,7 +1,6 @@
 package com.teohkenya.neph.main.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.teohkenya.neph.main.model.Bookmark;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.domain.Page;
@@ -13,10 +12,10 @@ import java.util.List;
  **/
 @Getter
 @Setter
-public class BookmarksDto {
+public class BookmarksPagingDto {
 
     // List of all bookmarks
-    private List<Bookmark> data;
+    private List<BookmarkDto> data;
 
     // Total number of available bookmarks
     private long totalElements;
@@ -41,7 +40,7 @@ public class BookmarksDto {
     // Returns true if there is a previous page
     private boolean hasPrevious;
 
-    public BookmarksDto(Page<Bookmark> bookmarkPage){
+    public BookmarksPagingDto(Page<BookmarkDto> bookmarkPage){
         this.setData(bookmarkPage.getContent());
         this.setTotalElements(bookmarkPage.getTotalElements());
         this.setTotalPages(bookmarkPage.getTotalPages());
