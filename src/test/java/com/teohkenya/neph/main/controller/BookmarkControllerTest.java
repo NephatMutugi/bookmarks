@@ -4,7 +4,8 @@ import com.teohkenya.neph.main.model.Bookmark;
 import com.teohkenya.neph.main.repository.BookmarkRepo;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,6 +27,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  **/
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
+
+// Spin up a docker image test container
 @TestPropertySource(
         properties = "spring.datasource.url=jdbc:tc:mysql:8.0.30:///bookmarks"
 )
@@ -68,15 +71,22 @@ class BookmarkControllerTest {
     }
 
 
-    @Test
-    void getAllBookmarks() {
+    /**
+     * A parameterized test allows us to add parameters to our test
+     * We use the annotations: @ParameterizedTest, and @CsvSource to pass values*/
+    @ParameterizedTest
+    @CsvSource({
+            "1, 16, 2, 1",
+            "2, 16, 2, 2"
+    })
+    void getAllBookmarks(int pageNo, int totalElements, int totalPages, int currentPage) {
         try {
             // Get api call and expect status 200
-            mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/bookmarks/paged"))
+            mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/bookmarks/paged?page=" + pageNo))
                     .andExpect(status().isOk())
-                    .andExpect(jsonPath("$.totalElements", CoreMatchers.equalTo(16)))
-                    .andExpect(jsonPath("$.totalPages", CoreMatchers.equalTo(2)))
-                    .andExpect(jsonPath("$.currentPage", CoreMatchers.equalTo(1)));
+                    .andExpect(jsonPath("$.totalElements", CoreMatchers.equalTo(totalElements)))
+                    .andExpect(jsonPath("$.totalPages", CoreMatchers.equalTo(totalPages)))
+                    .andExpect(jsonPath("$.currentPage", CoreMatchers.equalTo(currentPage)));
 
         } catch (Exception e) {
             throw new RuntimeException(e);
