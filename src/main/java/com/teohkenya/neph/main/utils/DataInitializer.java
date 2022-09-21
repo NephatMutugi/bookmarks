@@ -2,9 +2,7 @@ package com.teohkenya.neph.main.utils;
 
 import com.teohkenya.neph.main.model.Bookmark;
 import com.teohkenya.neph.main.repository.BookmarkRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 
@@ -16,14 +14,14 @@ public class DataInitializer implements CommandLineRunner {
 
     /*---------------GLOBAL VARIABLES-------------------*/
 
-    final BookmarkRepo bookmarkRepo;
-    final Utils utils;
+    private final BookmarkRepo bookmarkRepo;
+    private final Utils utils;
 
-    @Autowired
     public DataInitializer(BookmarkRepo bookmarkRepo, Utils utils) {
         this.bookmarkRepo = bookmarkRepo;
         this.utils = utils;
     }
+
 
     // We'll use this method to save several bookmarks into our database
     @Override
